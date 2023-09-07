@@ -1,0 +1,19 @@
+{
+  "name": "android manifest",
+  "theme_color": "#1d2023",
+  "background_color": "#1d2023",
+  "icons": [
+    {
+      "name": "Android Icon One",
+      "src": "img/icons/android/favicon-android-192.png",
+      "type": "image/png",
+      "sizes": "192x135"
+    },
+    {
+      "name": "Android Icon One",
+      "src": "img/icons/android/favicon-android-512.png",
+      "type": "image/png",
+      "sizes": "512x359"
+    }
+  ]
+}

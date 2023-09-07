@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="cs">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="img/icons/favicon.ico" />
+    <link rel="apple-touch-icon" href="img/icons/apple-favicon.png" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <meta
+      name="description"
+      content="Gyrosdoruky is a fast-food ordering service, which allows users order fast-food from Gyrosdoruky company"
+    />
+    <meta name="theme-color" content="#1d2023" />
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;800;900&family=Rubik:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Leaflet -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+      integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+      crossorigin=""
+    />
+    <script
+      defer
+      src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+      integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+      crossorigin=""
+    ></script>
+    <!-- Esri Leaflet from CDN -->
+    <script
+      defer
+      src="https://unpkg.com/esri-leaflet@3.0.8/dist/esri-leaflet.js"
+      integrity="sha512-E0DKVahIg0p1UHR2Kf9NX7x7TUewJb30mxkxEm2qOYTVJObgsAGpEol9F6iK6oefCbkJiA4/i6fnTHzM6H1kEA=="
+      crossorigin=""
+    ></script>
+    <!-- Esri Leaflet Geocoder from CDN -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/esri-leaflet-geocoder@3.1.3/dist/esri-leaflet-geocoder.css"
+      integrity="sha512-IM3Hs+feyi40yZhDH6kV8vQMg4Fh20s9OzInIIAc4nx7aMYMfo+IenRUekoYsHZqGkREUgx0VvlEsgm7nCDW9g=="
+      crossorigin=""
+    />
+    <script
+      defer
+      src="https://unpkg.com/esri-leaflet-geocoder@3.1.3/dist/esri-leaflet-geocoder.js"
+      integrity="sha512-mwRt9Y/qhSlNH3VWCNNHrCwquLLU+dTbmMxVud/GcnbXfOKJ35sznUmt3yM39cMlHR2sHbV9ymIpIMDpKg4kKw=="
+      crossorigin=""
+    ></script>
+    <!-- SMTP script -->
+    <script defer src="smtp.js"></script>
+    <!-- Arched headline -->
+    <script
+      defer
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+      integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script defer src="/circletype.min.js"></script>
+    <!-- My -->
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="queries.css" />
+    <script defer src="map.js"></script>
+    <script defer src="script.js"></script>
+    <title>#PLACEHOLDER</title>
+  </head>
+  <body>
+    <div class="header-container intro">
+      <header class="header center">
+        <a href="#hero" class="logo">
+          <img
+            src="/img/gyros-do-ruky-light-logo.webp"
+            alt="gyros do ruky logo #gyrosdoruky"
+          />
+        </a>
+        <nav class="nav hidden">
+          <ul>
+            <li class="nav-item">
+              <a class="nav-link" href="#hero">HOME</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#main-menu">MENU</a>
+            </li>
+            <li class="nav-item form">
+              <a class="nav-link" href="#form-container">CART</a>
+            </li>
+          </ul>
+          <button class="btn-phone-menu d-none" title="menu ikona">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="#d2d2d3"
+              height="20px"
+              class="btn-phone-menu-icon icon-visible"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+              />
+            </svg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="#d2d2d3"
+              height="20px"
+              class="btn-phone-menu-icon"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+        </nav>
+      </header>
+    </div>
+    <main class="container hidden visible">
+      <!-- ************************************************************************************************************** -->
+      <!-- HERO -->
+      <!-- ************************************************************************************************************** -->
+      <div id="hero" class="main-container">
+        <div class="hero-container center">
+          <article class="hero">
+            <header class="hero-header">
+              <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+              <h1 class="hero-heading"># P L A C E H O L D E R</h1>
+            </header>
+            <section class="hero-description-section">
+              <section class="hours">
+                <h2 class="hours-heading">
+                  <span>O</span><span>p</span><span>e</span><span>n</span>
+                </h2>
+                <p>Mo - Fri<span>11:00 - 21:00</span></p>
+              </section>
+              <!-- <section class="special-info">
+                <h2>
+                  ❌❌❌❌<br />
+                  Z technických důvodů máme 17. a 18. listopadu ZAVŘENO.
+                  <br />
+                  Děkujeme za pochopení 😊
+                </h2>
+              </section> -->
+              <div class="delivery-areas">
+                <section class="delivery">
+                  <h2 class="delivery-heading">DELIVERY</h2>
+                  <div class="delivery-content">
+                    <h2>
+                      <ul>
+                        <li>Housing</li>
+                        <li>Housing</li>
+                      </ul>
+                    </h2>
+                    <h2 class="delivery-heading">free</h2>
+                    <!-- <p>zdarma</p> -->
+                  </div>
+                  <div class="icons">
+                    <a
+                      href="javascript:void();"
+                      ><svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="ionicon"
+                        viewBox="0 0 512 512"
+                      >
+                        <title>Logo Facebook odkaz na profil</title>
+                        <path
+                          d="M480 257.35c0-123.7-100.3-224-224-224s-224 100.3-224 224c0 111.8 81.9 204.47 189 221.29V322.12h-56.89v-64.77H221V208c0-56.13 33.45-87.16 84.61-87.16 24.51 0 50.15 4.38 50.15 4.38v55.13H327.5c-27.81 0-36.51 17.26-36.51 35v42h62.12l-9.92 64.77H291v156.54c107.1-16.81 189-109.48 189-221.31z"
+                          fill="none"
+                          stroke="#d2d2d3"
+                          stroke-width="32"
+                        /></svg></a
+                    ><a
+                      href="javascript:void();"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="ionicon"
+                        viewBox="0 0 512 512"
+                      >
+                        <title>Logo Instagram odkaz na profil</title>
+                        <path
+                          d="M349.33 69.33a93.62 93.62 0 0193.34 93.34v186.66a93.62 93.62 0 01-93.34 93.34H162.67a93.62 93.62 0 01-93.34-93.34V162.67a93.62 93.62 0 0193.34-93.34h186.66m0-37.33H162.67C90.8 32 32 90.8 32 162.67v186.66C32 421.2 90.8 480 162.67 480h186.66C421.2 480 480 421.2 480 349.33V162.67C480 90.8 421.2 32 349.33 32z"
+                          fill="#d2d2d3"
+                          stroke=""
+                        />
+                        <path
+                          d="M377.33 162.67a28 28 0 1128-28 27.94 27.94 0 01-28 28zM256 181.33A74.67 74.67 0 11181.33 256 74.75 74.75 0 01256 181.33m0-37.33a112 112 0 10112 112 112 112 0 00-112-112z"
+                          fill="#d2d2d3"
+                          stroke=""
+                        /></svg>
+                      </a>
+                  </div>
+                </section>
+                <section class="delivery">
+                  <h2 class="delivery-heading">ROZVOZ</h2>
+                  <div class="delivery-content">
+                    <h2>
+                      <ul>
+                        <li>Housing</li>
+                        <li>Housing</li>
+                      </ul>
+                    </h2>
+                    <h2>for 49.99,-</h2>
+                  </div>
+                  <div class="icons">
+                    <a href="javascript:void();"
+                      ><svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="ionicon"
+                        viewBox="0 0 512 512"
+                      >
+                        <title>Call odkaz na telefonní číslo</title>
+                        <path
+                          d="M451 374c-15.88-16-54.34-39.35-73-48.76-24.3-12.24-26.3-13.24-45.4.95-12.74 9.47-21.21 17.93-36.12 14.75s-47.31-21.11-75.68-49.39-47.34-61.62-50.53-76.48 5.41-23.23 14.79-36c13.22-18 12.22-21 .92-45.3-8.81-18.9-32.84-57-48.9-72.8C119.9 44 119.9 47 108.83 51.6A160.15 160.15 0 0083 65.37C67 76 58.12 84.83 51.91 98.1s-9 44.38 23.07 102.64 54.57 88.05 101.14 134.49S258.5 406.64 310.85 436c64.76 36.27 89.6 29.2 102.91 23s22.18-15 32.83-31a159.09 159.09 0 0013.8-25.8C465 391.17 468 391.17 451 374z"
+                          fill="none"
+                          stroke="#d2d2d3"
+                          stroke-miterlimit="10"
+                          stroke-width="32"
+                        /></svg
+                    ></a>
+                    <a
+                      href="javascript:void();"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="ionicon"
+                        viewBox="0 0 512 512"
+                      >
+                        <title>Location odkaz na lokaci</title>
+                        <path
+                          d="M256 48c-79.5 0-144 61.39-144 137 0 87 96 224.87 131.25 272.49a15.77 15.77 0 0025.5 0C304 409.89 400 272.07 400 185c0-75.61-64.5-137-144-137z"
+                          fill="none"
+                          stroke="#d2d2d3"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="32"
+                        />
+                        <circle
+                          cx="256"
+                          cy="192"
+                          r="48"
+                          fill="none"
+                          stroke="#d2d2d3"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="32"
+                        /></svg
+                    ></a>
+                  </div>
+                </section>
+              </div>
+            </section>
+            <footer class="hero-footer">
+              <a href="#main-menu" class="btn-cta">
+                <p href="">
+                  <span>m</span><span>e</span><span>n</span><span>u</span>
+                </p>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="2.3"
+                  stroke="#74b816"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+                  />
+                </svg>
+              </a>
+            </footer>
+          </article>
+        </div>
+      </div>
+      <!-- ************************************************************************************************************** -->
+      <!-- MENU -->
+      <!-- ************************************************************************************************************** -->
+      <div id="main-menu" class="main-container main-menu">
+        <article class="main-menu-container center">
+          <section class="menu kebap">
+            <header class="menu-header">
+              <h1 class="menu-heading">Pita bread</h1>
+            </header>
+            <div class="main-menu-img-container">
+              <img
+                class="kebap-img"
+                src="/img/color-kebap-deco.webp"
+                alt="kebap section img vector kebap"
+              />
+            </div>
+            <div class="menu-items">
+              <section class="menu-item">
+                <article>
+                  <section>
+                    <p class="menu-item-description">
+                      <strong>CHICKEN GYROS</strong>,
+                      <span class="ingr-text"></span>
+                        iceberg lettuce, red cabbage, white cabbage, tomato,
+                        cucumber, sauce of your choice,</span
+                      >
+                      <strong>PITA CHLÉB</strong>
+                    </p>
+                    <ul class="sauces">
+                      <li class="sauce">
+                        <p class="sauce-content">Herbs</p>
+                      </li>
+                      <li class="sauce">
+                        <p class="sauce-content">Chilli</p>
+                      </li>
+                      <li class="sauce">
+                        <p class="sauce-content">Garlic</p>
+                      </li>
+                      <span class="menu-price">130,-</span>
+                    </ul>
+                  </section>
+                  <form autocomplete="off" class="ingredients">
+                    <h2 class="ingredients-heading">Addons</h2>
+                    <ul class="ingredients-list">
+                      <li class="ingredients-list-item">
+                        <div class="input-wrapper">
+                          <input
+                            type="checkbox"
+                            class="check-box"
+                            name="jen maso - 200g"
+                          />
+                          <label for="jen maso - 200g">just meat - 200g</label>
+                        </div>
+                        <span class="ingr-price">no fee</span>
+                      </li>
+                      <li class="ingredients-list-item">
+                        <div class="input-wrapper">
+                          <input
+                            type="checkbox"
+                            class="check-box"
+                            name="rozpečený pita chléb"
+                          />
+                          <label for="rozpečený pita chléb"
+                            >toasted pita bread</label
+                          >
+                        </div>
+                        <span class="ingr-price">25,-</span>
+                      </li>
+                      <li class="ingredients-list-item">
+                        <div class="input-wrapper">
+                          <input
+                            type="checkbox"
+                            class="check-box"
+                            name="feta sýr"
+                          />
+                          <label for="feta">feta cheese</label>
+                        </div>
+                        <span class="ingr-price">20,-</span>
+                      </li>
+                      <li class="ingredients-list-item">
+                        <div class="input-wrapper">
+                          <input
+                            type="checkbox"
+                            class="check-box"
+                            name="jalapenos"
+                          />
+                          <label for="jalapenos">jalapenos</label>
+                        </div>
+                        <span class="ingr-price">15,-</span>
+                      </li>
+                      <li class="ingredients-list-item">
+                        <div class="input-wrapper">
+                          <input
+                            type="checkbox"
+                            class="check-box"
+                            name="červená cibule"
+                          />
+                          <label for="červená cibule">red onion</label>
+                        </div>
+                        <span class="ingr-price">10,-</span>
+                      </li>
+                      <li class="ingredients-list-item">
+                        <div class="input-wrapper">
+                          <input
+                            type="checkbox"
+                            class="check-box"
+                            name="omáčka navíc"
+                          />
+                          <label for="omáčka navíc">extra sauce</label>
+                        </div>
+                        <span class="ingr-price">10,-</span>
+                      </li>
+                      <li class="ingredients-list-item extra-sauce">
+                        <ul class="sauces">
+                          <li class="sauce">
+                            <p class="sauce-content">Herbs</p>
+                          </li>
+                          <li class="sauce">
+                            <p class="sauce-content">Chilli</p>
+                          </li>
+                          <li class="sauce">
+                            <p class="sauce-content">Garlic</p>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </form>
+                  <button
+                    title="button add to order"
+                    class="shopping-cart"
+                  >
+                    <p>add to order</p>
+                  </button>
+                </article>
+              </section>
+            </div>
+          </section>
+          <section class="menu salad">
+            <header class="menu-header">
+              <h1 class="menu-heading">Salát</h1>
+            </header>
+            <div class="main-menu-img-container">
+              <img
+                src="/img/salad-vector.webp"
+                alt="salad section img vector salad"
+              />
+            </div>
+            <div class="menu-items">
+              <section class="menu-item">
+                <article>
+                  <section>
+                    <p class="menu-item-description">
+                      <strong>CHICKEN GYROS</strong>, iceberg lettuce, red cabbage,
+                      white cabbage, tomato, cucumber, sauce of your choice
+                    </p>
+                    <ul class="sauces">
+                      <li class="sauce">
+                        <p class="sauce-content">Herbs</p>
+                      </li>
+                      <li class="sauce">
+                        <p class="sauce-content">Chilli</p>
+                      </li>
+                      <li class="sauce">
+                        <p class="sauce-content">Garlic</p>
+                      </li>
+                      <span class="menu-price">120,-</span>
+                    </ul>
+                  </section>
+                  <form autocomplete="off" class="ingredients">
+                    <h2 class="ingredients-heading">Addons</h2>
+                    <ul class="ingredients-list">
+                      <li class="ingredients-list-item">
+                        <div class="input-wrapper">
+                          <input
+                            type="checkbox"
+                            class="check-box"
+                            name="jen maso - 200g"
+                          />
+                          <label for="jen maso - 200g">just meat - 200g</label>
+                        </div>
+                        <span class="ingr-price">no fee</span>
+                      </li>
+                      <li class="ingredients-list-item">
+                        <div class="input-wrapper">
+                          <input
+                            type="checkbox"
+                            class="check-box"
+                            name="rozpečený pita chléb"
+                          />
+                          <label for="rozpečený pita chléb"
+                            >toasted pita bread</label
+                          >
+                        </div>
+                        <span class="ingr-price">25,-</span>
+                      </li>
+                      <li class="ingredients-list-item">
+                        <div class="input-wrapper">
+                          <input
+                            type="checkbox"
+                            class="check-box"
+                            name="feta sýr"
+                          />
+                          <label for="feta">feta cheese</label>
+                        </div>
+                        <span class="ingr-price">20,-</span>
+                      </li>
+                      <li class="ingredients-list-item">
+                        <div class="input-wrapper">
+                          <input
+                            type="checkbox"
+                            class="check-box"
+                            name="jalapenos"
+                          />
+                          <label for="jalapenos">jalapenos</label>
+                        </div>
+                        <span class="ingr-price">15,-</span>
+                      </li>
+                      <li class="ingredients-list-item">
+                        <div class="input-wrapper">
+                          <input
+                            type="checkbox"
+                            class="check-box"
+                            name="červená cibule"
+                          />
+                          <label for="červená cibule">red onion</label>
+                        </div>
+                        <span class="ingr-price">10,-</span>
+                      </li>
+                      <li class="ingredients-list-item">
+                        <div class="input-wrapper">
+                          <input
+                            type="checkbox"
+                            class="check-box"
+                            name="omáčka navíc"
+                          />
+                          <label for="omáčka navíc">extra sauce</label>
+                        </div>
+                        <span class="ingr-price">10,-</span>
+                      </li>
+                      <li class="ingredients-list-item extra-sauce">
+                        <ul class="sauces">
+                          <li class="sauce">
+                            <p class="sauce-content">Herbs</p>
+                          </li>
+                          <li class="sauce">
+                            <p class="sauce-content">Chilli</p>
+                          </li>
+                          <li class="sauce">
+                            <p class="sauce-content">Garlic</p>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </form>
+                  <button
+                    title="button add to order"
+                    class="shopping-cart"
+                  >
+                    <p>add to order</p>
+                  </button>
+                </article>
+              </section>
+            </div>
+          </section>
+          <section class="menu durum">
+            <header class="menu-header">
+              <h1 class="menu-heading">Tortilla</h1>
+            </header>
+            <div class="main-menu-img-container">
+              <img
+                class="kebap-img"
+                src="/img/color-durum-deco.webp"
+                alt="durum section img vector durum"
+              />
+            </div>
+            <div class="menu-items">
+              <section class="menu-item">
+                <article>
+                  <section>
+                    <p class="menu-item-description">
+                      <strong>CHICKEN GYROS</strong>,
+                      <span class="ingr-text"
+                      > iceberg lettuce, red cabbage, white cabbage, tomato, cucumber,
+                      sauce of your choice</span
+                      >, <strong>TORTILLA</strong>
+                    </p>
+                    <ul class="sauces">
+                      <li class="sauce">
+                        <p class="sauce-content">Herbs</p>
+                      </li>
+                      <li class="sauce">
+                        <p class="sauce-content">Chilli</p>
+                      </li>
+                      <li class="sauce">
+                        <p class="sauce-content">Garlic</p>
+                      </li>
+                      <span class="menu-price">130,-</span>
+                    </ul>
+                  </section>
+                  <form autocomplete="off" class="ingredients">
+                    <h2 class="ingredients-heading">Addons</h2>
+                    <ul class="ingredients-list">
+                      <li class="ingredients-list-item">
+                        <div class="input-wrapper">
+                          <input
+                            type="checkbox"
+                            class="check-box"
+                            name="jen maso - 200g"
+                          />
+                          <label for="jen maso - 200g">just meat - 200g</label>
+                        </div>
+                        <span class="ingr-price">no fee</span>
+                      </li>
+                      <li class="ingredients-list-item">
+                        <div class="input-wrapper">
+                          <input
+                            type="checkbox"
+                            class="check-box"
+                            name="rozpečený pita chléb"
+                          />
+                          <label for="rozpečený pita chléb"
+                            >toasted pita bread</label
+                          >
+                        </div>
+                        <span class="ingr-price">25,-</span>
+                      </li>
+                      <li class="ingredients-list-item">
+                        <div class="input-wrapper">
+                          <input
+                            type="checkbox"
+                            class="check-box"
+                            name="feta sýr"
+                          />
+                          <label for="feta">feta cheese</label>
+                        </div>
+                        <span class="ingr-price">20,-</span>
+                      </li>
+                      <li class="ingredients-list-item">
+                        <div class="input-wrapper">
+                          <input
+                            type="checkbox"
+                            class="check-box"
+                            name="jalapenos"
+                          />
+                          <label for="jalapenos">jalapenos</label>
+                        </div>
+                        <span class="ingr-price">15,-</span>
+                      </li>
+                      <li class="ingredients-list-item">
+                        <div class="input-wrapper">
+                          <input
+                            type="checkbox"
+                            class="check-box"
+                            name="červená cibule"
+                          />
+                          <label for="červená cibule">red onion</label>
+                        </div>
+                        <span class="ingr-price">10,-</span>
+                      </li>
+                      <li class="ingredients-list-item">
+                        <div class="input-wrapper">
+                          <input
+                            type="checkbox"
+                            class="check-box"
+                            name="omáčka navíc"
+                          />
+                          <label for="omáčka navíc">extra sauce</label>
+                        </div>
+                        <span class="ingr-price">10,-</span>
+                      </li>
+                      <li class="ingredients-list-item extra-sauce">
+                        <ul class="sauces">
+                          <li class="sauce">
+                            <p class="sauce-content">Herbs</p>
+                          </li>
+                          <li class="sauce">
+                            <p class="sauce-content">Chilli</p>
+                          </li>
+                          <li class="sauce">
+                            <p class="sauce-content">Garlic</p>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </form>
+                  <button
+                    title="button add to order"
+                    class="shopping-cart"
+                  >
+                    <p>add to order</p>
+                  </button>
+                </article>
+              </section>
+            </div>
+          </section>
+          <section class="alergens-section">
+            <h3 class="alergens-heading">Alergens</h3>
+            <ul class="alergens-main-list">
+              <li>
+                <ul>
+                  <h4 class="alergen-meal-heading">Pita bread / Tortilla</h4>
+                  <li>
+                    <span class="alergen-number">1</span>Cereals containing
+                    gluten (tortilla/pita)
+                  </li>
+                  <li>
+                    <span class="alergen-number">3</span>Eggs and egg products
+                    (dressing)
+                  </li>
+                  <li>
+                    <span class="alergen-number">7</span>Milk and milk products
+                    (dressing)
+                  </li>
+                  <li>
+                    <span class="alergen-number">10</span>Mustard and its
+                    products (meat)
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <ul>
+                  <h4 class="alergen-meal-heading">Salad</h4>
+                  <li>
+                    <span class="alergen-number">1</span>Cereals containing
+                    gluten (tortilla/pita)
+                  </li>
+                  <li>
+                    <span class="alergen-number">3</span>Eggs and egg products
+                    (dressing)
+                  </li>
+                  <li>
+                    <span class="alergen-number">10</span>Mustard and its
+                    products (meat)
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </section>
+        </article>
+      </div>
+      <!-- ************************************************************************************************************** -->
+      <!-- ORDER FORM -->
+      <!-- ************************************************************************************************************** -->
+      <div id="form-container" class="main-container form-container">
+        <form id="form" class="order-form center" action="">
+          <h2 class="form-header">Your Order</h2>
+          <section class="selected-items"></section>
+          <div class="form-inputs">
+            <div class="input-container">
+              <label class="lbl name" for="#name">Name</label>
+              <div class="input-container--input">
+                <input
+                  class="input"
+                  type="text"
+                  id="name"
+                  placeholder="Jan"
+                  minlength="3"
+                />
+              </div>
+            </div>
+            <div class="input-container select">
+              <label class="lbl email" for="#address">Payment</label>
+              <select name="payment type" id="payment-type">
+                <option value="Kartou">Card</option>
+                <option value="Hotově">Cash</option>
+              </select>
+            </div>
+            <div class="input-container tel">
+              <label
+                class="lbl tel"
+                for="#address"
+                pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
+                required="required"
+                >Phone</label
+              >
+              <div class="input-container--input">
+                <input
+                  class="input tel"
+                  type="tel"
+                  id="tel"
+                  placeholder="777333444"
+                  minlength="9"
+                />
+              </div>
+            </div>
+          </div>
+          <section class="customer-adress-container">
+            <div id="map" class="map"></div>
+          </section>
+          <button
+            type="submit"
+            class="btn-send-order"
+            required="required"
+            title="Send order"
+          >
+            Send order
+          </button>
+        </form>
+      </div>
+    </main>
+    <footer>
+      <p>Copyright &copy; J.B. Všechna práva vyhrazena</p>
+    </footer>
+  </body>
+</html>
