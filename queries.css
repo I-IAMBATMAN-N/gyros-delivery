@@ -1,3 +1,10 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v8.4.14,
+* Autoprefixer: v10.4.7
+* Browsers: last 4 version
+*/
+
 /* RESPONSIVE */
 /* ******************************************************************* */
 /* 1400px */
@@ -6,6 +13,8 @@
   .main-menu-container {
     gap: 5vh;
     padding: 0 2.4rem;
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
     justify-content: end;
   }
   .menu-heading {
@@ -26,6 +35,8 @@
     gap: 3.5vh;
   }
   .form-container {
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
     justify-content: start;
   }
   .order-form {
@@ -63,6 +74,8 @@
     height: auto;
   }
   .btn-phone-menu {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
   }
   .main-container,
@@ -73,13 +86,19 @@
     height: 8%;
   }
   .header-container .header {
+    -webkit-box-align: end;
+    -ms-flex-align: end;
     align-items: flex-end;
   }
   .header-container.intro .header {
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
   }
   .main-menu-container {
     gap: 4.8rem;
+    -webkit-box-pack: space-evenly;
+    -ms-flex-pack: space-evenly;
     justify-content: space-evenly;
   }
   .main-menu-img-container {
@@ -89,9 +108,16 @@
     background-size: 90%;
   }
   .hero .hero-footer {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
     width: 100%;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
   }
   .hero-footer .delivery .delivery-content-container .delivery-content {
@@ -101,7 +127,11 @@
     width: 0;
   }
   .icons {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
     justify-content: start;
     gap: 4rem;
   }
@@ -113,7 +143,12 @@
     background-size: 80%;
     background-repeat: no-repeat;
     background-position: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
     align-items: flex-start;
   }
   .main-menu-container .menu.salad {
@@ -124,15 +159,21 @@
   }
   .main-menu-container .menu .menu-header {
     position: initial;
+    -webkit-transform: rotate(0deg) translate(0, 0);
+    -ms-transform: rotate(0deg) translate(0, 0);
     transform: rotate(0deg) translate(0, 0);
   }
   .main-menu-container .menu.salad .menu-header {
+    -webkit-transform: rotate(0deg) translate(0, 0);
+    -ms-transform: rotate(0deg) translate(0, 0);
     transform: rotate(0deg) translate(0, 0);
   }
   .menu-heading {
     padding: 0.4rem 0;
   }
   .menu-heading::after {
+    -webkit-transition: width 1s ease;
+    -o-transition: width 1s ease;
     transition: width 1s ease;
     content: "";
     display: inline-block;
@@ -159,16 +200,30 @@
     width: 50%;
   }
   .header-container.phone .header {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
     justify-content: start;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
   }
   .header-container.phone .header .nav {
     padding-top: 8vh;
     /* height: 50%; */
     width: 100%;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
     justify-content: start;
     gap: 4.8rem;
   }
@@ -188,7 +243,12 @@
     visibility: visible;
     pointer-events: all;
     width: 100%;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     flex-direction: column;
     gap: 5vh;
@@ -214,14 +274,20 @@
     text-align: left;
   }
   .menu:nth-child(even) .menu-items .menu-item article .sauces {
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
     justify-content: start;
   }
   .menu:nth-child(even) .menu-items .menu-item article .sauces .menu-price {
     margin-left: auto;
     margin-right: 0;
+    -webkit-box-ordinal-group: 1;
+    -ms-flex-order: 0;
     order: 0;
   }
   .menu:nth-child(even) .menu-items .menu-item article section {
+    -webkit-box-align: start;
+    -ms-flex-align: start;
     align-items: flex-start;
   }
   .menu:nth-child(2n) .menu-items .menu-item article button.shopping-cart {
@@ -229,6 +295,8 @@
     right: 0;
   }
   .menu:nth-child(2n) .menu-items .menu-item article .ingredients {
+    -webkit-box-align: start;
+    -ms-flex-align: start;
     align-items: flex-start;
   }
   button.shopping-cart {
@@ -236,8 +304,14 @@
     left: 0;
     right: 0;
     width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
+    -webkit-transform: translateY(150%);
+    -ms-transform: translateY(150%);
     transform: translateY(150%);
     background-color: #1d2023;
   }
@@ -252,6 +326,8 @@
     gap: 3.2rem;
   }
   .order-form .form-header {
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
     width: fit-content;
   }
   .order-form.loaded .form-header::after {
@@ -272,14 +348,20 @@
     width: 0;
   } */
   .order-form .selected-items {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 300px;
     flex: 0 0 300px;
   }
   .order-form .customer-adress-container {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 300px;
     flex: 0 0 300px;
   }
   #map {
     border-radius: 0;
     width: 100%;
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
     flex: 1;
   }
 }
@@ -305,6 +387,8 @@
     height: 100%;
   }
   .main-menu-container .menu {
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
     justify-content: start;
   }
   .menu-header .menu-heading {
